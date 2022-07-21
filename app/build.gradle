@@ -1,6 +1,9 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -29,11 +32,61 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
+    def view_binding_delegate_property = "1.5.6"
+    def nav_version = "2.5.0"
+    def room_version = "2.4.2"
+    def coroutines_version = "1.6.1"
+    def glide_version = "4.13.0"
+    def in_app_browser_version = "1.4.0"
+    def paging_version = "3.1.1"
+    def retrofit_version = "2.9.0"
+    def rv_version = "1.2.1"
+
+    // ViewBinding Delegate Property
+    implementation "com.github.kirich1409:viewbindingpropertydelegate-noreflection:$view_binding_delegate_property"
+
+    // Navigation component
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    // Room
+    implementation("androidx.room:room-runtime:$room_version")
+
+    // To use Kotlin annotation processing tool (kapt)
+    kapt "androidx.room:room-compiler:$room_version"
+
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$room_version"
+
+    // Coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version")
+
+    //Glide
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
+
+    //In app browser
+    implementation "androidx.browser:browser:$in_app_browser_version"
+
+    //Paging3
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
+
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
+    //Rv
+    implementation "androidx.recyclerview:recyclerview:$rv_version"
+
+    implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
